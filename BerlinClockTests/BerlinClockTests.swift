@@ -41,4 +41,18 @@ struct BerlinClockTests {
     @Test func testFiveHoursLampsReturn4RedWhenBetween20And23() {
         #expect(clock.getFiveHoursLamps(hours: 23) == [.red, .red, .red, .red])
     }
+    
+    // Single hours lamps
+    @Test func testSingleHoursLampsReturnAllOffWhenMultipleOf5() {
+        #expect(clock.getSingleHoursLamps(hours: 0) == [.off, .off, .off, .off])
+        #expect(clock.getSingleHoursLamps(hours: 5) == [.off, .off, .off, .off])
+        #expect(clock.getSingleHoursLamps(hours: 10) == [.off, .off, .off, .off])
+    }
+    
+    @Test func testSingleHoursLampsReturnModulo5AsRedLamps() {
+        #expect(clock.getSingleHoursLamps(hours: 1) == [.red, .off, .off, .off])
+        #expect(clock.getSingleHoursLamps(hours: 7) == [.red, .red, .off, .off])
+        #expect(clock.getSingleHoursLamps(hours: 13) == [.red, .red, .red, .off])
+        #expect(clock.getSingleHoursLamps(hours: 19) == [.red, .red, .red, .red])
+    }
 }

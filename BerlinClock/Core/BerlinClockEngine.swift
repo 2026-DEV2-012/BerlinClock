@@ -9,6 +9,6 @@ struct BerlinClockEngine {
     init() {}
     
     func getLampFor(second: Int) -> LampState {
-        return .red
+        return second.isMultiple(of: 2) ? .yellow : .off
     }
 }

@@ -44,6 +44,37 @@ struct BerlinClockTests {
         #expect(clock.getSingleHoursLamps(hours: 19) == [.red, .red, .red, .red])
     }
     
+    //MARK: Five minutes lamps
+    @Test func testFiveMinutesLampsReturnDivisionBy5AsLitFromLeftToRight() {
+        let allOffResult = clock.getFiveMinutesLamps(minutes: 4)
+        #expect(allOffResult.allSatisfy { $0 == .off })
+        
+        let smallResult = clock.getFiveMinutesLamps(minutes: 16)
+        #expect(smallResult.prefix(3).allSatisfy { $0 != .off })
+        #expect(smallResult.dropFirst(3).allSatisfy { $0 == .off })
+        
+        let bigResult = clock.getFiveMinutesLamps(minutes: 49)
+        #expect(bigResult.prefix(9).allSatisfy { $0 != .off })
+        #expect(bigResult.dropFirst(9).allSatisfy { $0 == .off })
+        
+        let allLitResult = clock.getFiveMinutesLamps(minutes: 59)
+        #expect(allLitResult.allSatisfy { $0 != .off })
+    }
+    
+    @Test func testFiveMinutesLampsReturnRedForQuarter() {
+        let result = clock.getFiveMinutesLamps(minutes: 55)
+        #expect(result[2] == .red)
+        #expect(result[5] == .red)
+        #expect(result[8] == .red)
+    }
+    
+    @Test func testFiveMinutesLampsReturnYellowForNonQuarter() {
+        let result = clock.getFiveMinutesLamps(minutes: 55)
+        #expect(result[0] == .yellow)
+        #expect(result[4] == .yellow)
+        #expect(result[10] == .yellow)
+    }
+    
     //MARK: Single minutes lamps
     @Test func testSingleMinutesLampsReturnAllOffWHenMultipleOf5() {
         #expect(clock.getSingleMinutesLamps(minutes: 0) == [.off, .off, .off, .off])

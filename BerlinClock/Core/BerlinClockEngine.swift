@@ -22,6 +22,10 @@ struct BerlinClockEngine {
         return (0..<4).map { $0 < modulo ? .red : .off }
     }
     
+    func getFiveMinutesLamps(minutes: Int) -> [LampState] {
+        return (0..<11).map { _ in .red }
+    }
+    
     func getSingleMinutesLamps(minutes: Int) -> [LampState] {
         let modulo = minutes % 5
         return (0..<4).map { $0 < modulo ? .yellow : .off }

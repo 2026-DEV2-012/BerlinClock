@@ -13,6 +13,7 @@ struct BerlinClockEngine {
     }
     
     func getFiveHoursLamps(hours: Int) -> [LampState] {
-        return [.yellow, .yellow, .yellow, .yellow]
+        let redLampsCount: Int = hours / 5
+        return (0..<4).map { $0 < redLampsCount ? .red : .off }
     }
 }

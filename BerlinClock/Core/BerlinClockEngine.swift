@@ -11,4 +11,8 @@ struct BerlinClockEngine {
     func getSecondsLamp(seconds: Int) -> LampState {
         return seconds.isMultiple(of: 2) ? .yellow : .off
     }
+    
+    func getFiveHoursLamps(hours: Int) -> [LampState] {
+        return [.yellow, .yellow, .yellow, .yellow]
+    }
 }

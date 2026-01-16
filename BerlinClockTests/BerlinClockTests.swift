@@ -12,7 +12,7 @@ struct BerlinClockTests {
 
     private let clock = BerlinClockEngine()
     
-    // Seconds lamp
+    //MARK: Seconds lamp
     @Test func testSecondsLampReturnYellowIfEven() {
         #expect(clock.getSecondsLamp(seconds: 30) == .yellow)
     }
@@ -21,7 +21,7 @@ struct BerlinClockTests {
         #expect(clock.getSecondsLamp(seconds: 31) == .off)
     }
     
-    // Five hours lamps
+    //MARK: Five hours lamps
     @Test func testFiveHoursLampsReturnAllOffWhenLessThan5() {
         #expect(clock.getFiveHoursLamps(hours: 4) == [.off, .off, .off, .off])
     }
@@ -42,7 +42,7 @@ struct BerlinClockTests {
         #expect(clock.getFiveHoursLamps(hours: 23) == [.red, .red, .red, .red])
     }
     
-    // Single hours lamps
+    //MARK: Single hours lamps
     @Test func testSingleHoursLampsReturnAllOffWhenMultipleOf5() {
         #expect(clock.getSingleHoursLamps(hours: 0) == [.off, .off, .off, .off])
         #expect(clock.getSingleHoursLamps(hours: 5) == [.off, .off, .off, .off])
@@ -54,5 +54,21 @@ struct BerlinClockTests {
         #expect(clock.getSingleHoursLamps(hours: 7) == [.red, .red, .off, .off])
         #expect(clock.getSingleHoursLamps(hours: 13) == [.red, .red, .red, .off])
         #expect(clock.getSingleHoursLamps(hours: 19) == [.red, .red, .red, .red])
+    }
+    
+    //MARK: Single minutes lamps
+    @Test func testSingleMinutesLampsReturnAllOffWHenMultipleOf5() {
+        #expect(clock.getSingleMinutesLamps(minutes: 0) == [.off, .off, .off, .off])
+        #expect(clock.getSingleMinutesLamps(minutes: 5) == [.off, .off, .off, .off])
+        #expect(clock.getSingleMinutesLamps(minutes: 15) == [.off, .off, .off, .off])
+        #expect(clock.getSingleMinutesLamps(minutes: 30) == [.off, .off, .off, .off])
+        #expect(clock.getSingleMinutesLamps(minutes: 55) == [.off, .off, .off, .off])
+    }
+    
+    @Test func testSingleMinutesLampsReturnModulo5AsYellowLamps() {
+        #expect(clock.getSingleMinutesLamps(minutes: 6) == [.yellow, .off, .off, .off])
+        #expect(clock.getSingleMinutesLamps(minutes: 12) == [.yellow, .yellow, .off, .off])
+        #expect(clock.getSingleMinutesLamps(minutes: 33) == [.yellow, .yellow, .yellow, .off])
+        #expect(clock.getSingleMinutesLamps(minutes: 59) == [.yellow, .yellow, .yellow, .yellow])
     }
 }

@@ -10,13 +10,14 @@ import Testing
 
 struct BerlinClockTests {
 
+    // Seconds lamp
     @Test func testSecondsLampReturnYellowIfEven() {
         let clock = BerlinClockEngine()
-        #expect(clock.getLampFor(second: 30) == .yellow)
+        #expect(clock.getSecondsLamp(seconds: 30) == .yellow)
     }
     
     @Test func testSecondsLampReturnOffIfOdd() {
         let clock = BerlinClockEngine()
-        #expect(clock.getLampFor(second: 31) == .off)
+        #expect(clock.getSecondsLamp(seconds: 31) == .off)
     }
 }

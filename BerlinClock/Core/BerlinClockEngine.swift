@@ -8,7 +8,7 @@
 struct BerlinClockEngine {
     init() {}
     
-    func getLampFor(second: Int) -> LampState {
-        return second.isMultiple(of: 2) ? .yellow : .off
+    func getSecondsLamp(seconds: Int) -> LampState {
+        return seconds.isMultiple(of: 2) ? .yellow : .off
     }
 }

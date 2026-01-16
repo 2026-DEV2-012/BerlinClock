@@ -5,8 +5,28 @@
 //  Created by Julien Henrard on 16/01/2026.
 //
 
+import Foundation
+
 struct BerlinClockEngine {
     init() { }
+
+    func convert(date: Date) -> BerlinClockResult {
+        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: date)
+        return convert(
+            hours: components.hour ?? 0,
+            minutes: components.minute ?? 0,
+            seconds: components.second ?? 0
+        )
+    }
+
+    func convert(hours: Int, minutes: Int, seconds: Int) -> BerlinClockResult {
+        return .init(
+            seconds: getSecondsLamp(seconds: seconds),
+            fiveHoursRow: getFiveHoursLamps(hours: hours),
+            singleHoursRow: getSingleHoursLamps(hours: hours),
+            fiveMinutesRow: getFiveMinutesLamps(minutes: minutes),
+            singleMinutesRow: getSingleMinutesLamps(minutes: minutes))
+    }
 
     func getSecondsLamp(seconds: Int) -> LampState {
         return seconds.isMultiple(of: 2) ? .yellow : .off

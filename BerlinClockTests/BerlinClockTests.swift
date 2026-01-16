@@ -90,4 +90,18 @@ struct BerlinClockTests {
         #expect(clock.getSingleMinutesLamps(minutes: 33) == [.yellow, .yellow, .yellow, .off])
         #expect(clock.getSingleMinutesLamps(minutes: 59) == [.yellow, .yellow, .yellow, .yellow])
     }
+    
+    //MARK: convert
+    @Test func testCompleteConversion() {
+        let result = clock.convert(hours: 13, minutes: 17, seconds: 1)
+        
+        #expect(result.seconds == .off)
+        #expect(result.fiveHoursRow == [.red, .red, .off, .off])
+        #expect(result.singleHoursRow == [.red, .red, .red, .off])
+        #expect(result.fiveMinutesRow.prefix(3).allSatisfy { $0 != .off })
+        #expect(result.fiveMinutesRow.prefix(2).allSatisfy { $0 == .yellow })
+        #expect(result.fiveMinutesRow[2] == .red)
+        #expect(result.fiveMinutesRow.dropFirst(3).allSatisfy { $0 == .off })
+        #expect(result.singleMinutesRow == [.yellow, .yellow, .off, .off])
+    }
 }

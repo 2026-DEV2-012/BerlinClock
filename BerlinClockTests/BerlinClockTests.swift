@@ -22,23 +22,11 @@ struct BerlinClockTests {
     }
     
     //MARK: Five hours lamps
-    @Test func testFiveHoursLampsReturnAllOffWhenLessThan5() {
+    @Test func testFiveHoursLampsReturnDivisionBy5AsRedLamps() {
         #expect(clock.getFiveHoursLamps(hours: 4) == [.off, .off, .off, .off])
-    }
-    
-    @Test func testFiveHoursLampsReturn1RedWhenBetween5And9() {
         #expect(clock.getFiveHoursLamps(hours: 8) == [.red, .off, .off, .off])
-    }
-    
-    @Test func testFiveHoursLampsReturn2RedWhenBetween10And14() {
         #expect(clock.getFiveHoursLamps(hours: 11) == [.red, .red, .off, .off])
-    }
-    
-    @Test func testFiveHoursLampsReturn3RedWhenBetween15And19() {
         #expect(clock.getFiveHoursLamps(hours: 15) == [.red, .red, .red, .off])
-    }
-    
-    @Test func testFiveHoursLampsReturn4RedWhenBetween20And23() {
         #expect(clock.getFiveHoursLamps(hours: 23) == [.red, .red, .red, .red])
     }
     

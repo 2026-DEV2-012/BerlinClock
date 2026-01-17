@@ -27,29 +27,29 @@ struct BerlinClockView: View {
                     .frame(maxWidth: 80)
                 
                 HStack {
-                    ForEach(berlinClock.fiveHoursRow.enumerated(), id: \.offset) { _, lampState in
-                        LampView(state: lampState, shape: .rectangle)
+                    ForEach(berlinClock.fiveHoursRow.indices, id: \.self) { i in
+                        LampView(state: berlinClock.fiveHoursRow[i], shape: .rectangle)
                     }
                 }
                 .frame(maxHeight: 40)
                 
                 HStack {
-                    ForEach(berlinClock.singleHoursRow.enumerated(), id: \.offset) { _, lampState in
-                        LampView(state: lampState, shape: .rectangle)
+                    ForEach(berlinClock.singleHoursRow.indices, id: \.self) { i in
+                        LampView(state: berlinClock.singleHoursRow[i], shape: .rectangle)
                     }
                 }
                 .frame(maxHeight: 40)
                 
                 HStack {
-                    ForEach(berlinClock.fiveMinutesRow.enumerated(), id: \.offset) { _, lampState in
-                        LampView(state: lampState, shape: .rectangle)
+                    ForEach(berlinClock.fiveMinutesRow.indices, id: \.self) { i in
+                        LampView(state: berlinClock.fiveMinutesRow[i], shape: .rectangle)
                     }
                 }
                 .frame(maxHeight: 40)
                 
                 HStack {
-                    ForEach(berlinClock.singleMinutesRow.enumerated(), id: \.offset) { _, lampState in
-                        LampView(state: lampState, shape: .rectangle)
+                    ForEach(berlinClock.singleMinutesRow.indices, id: \.self) { i in
+                        LampView(state: berlinClock.singleMinutesRow[i], shape: .rectangle)
                     }
                 }
                 .frame(maxHeight: 40)
